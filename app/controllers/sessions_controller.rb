@@ -1,35 +1,45 @@
-# Help 
+# Help
 # Refer to: http://blog.codebykat.com/2012/07/23/remote-api-authentication-with-rails-3-using-activeresource-and-devise/
 # Inheriting from DeviseController
 # See http://stackoverflow.com/questions/11634605/uninitialized-constant-devisecontrollersinternalhelpers
 class SessionsController < DeviseController
+	before_filter :authenticate_user!, :except => [:create, :destroy]
+	# before_filter :ensure_params_exist
 	respond_to :json
-	prepend_before_filter :require_no_authentication, :only => [:create ]
-	
+
 	def create
-		build_resource
 		resource = User.find_for_database_authentication(:email => params[:email])
 		return invalid_login_attempt unless resource
 
 		if resource.valid_password?(params[:password])
-			resource.ensure_authentication_token!  #make sure the user has a token generated
-			render :json => { :authentication_token => resource.authentication_token,
-			:user_id => resource.id },
-			:status => :created
+			sign_in(:user, resource)
+			resource.ensure_authentication_token!
+			render :json=> {:success=>true, :auth_token=>resource.authentication_token, :email=>resource.email, :user_id=> resource.id}
 			return
 		end
+		invalid_login_attempt
 	end
 
 	def destroy
-		# expire auth token
-		@user=User.where(:authentication_token=>params[:auth_token]).first
-		@user.reset_authentication_token!
-		# sign_out(user);
-		render :json => { :message => ["Session deleted."] },  :success => true, :status => :ok
+		resource = User.find_for_database_authentication(:authentication_token => params[:auth_token])
+		resource.authentication_token = nil
+		resource.save
+		render :json=> {:success=>true, :message=>"Session Destroyed", :status =>200 }
+	end
+
+	protected
+	def ensure_params_exist
+		return unless params[:user_login].blank?
+		render :json=>{:success=>false, :message=>"missing user_login parameter"}, :status=>422
 	end
 
 	def invalid_login_attempt
-		warden.custom_failure!
-		render :json => { :errors => ["Invalid email or password."] },  :success => false, :status => :unauthorized
+		render :json=> {:success=>false, :message=>"Error with your login or password"}, :status=>401
 	end
 end
+
+
+# Testing
+# curl -v -H "Accept: application/json" -H "Content-type: application/json" -X GET --data '{"auth_token":"WaEZrcHZqxWRYi8d5pmj"}' http://localhost:3000/users
+#
+# curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST --data '{"email": "abc@abc.com", "password":"password"}' http://localhost:3000/users/sign_in.json
