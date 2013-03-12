@@ -22,9 +22,14 @@ class SessionsController < DeviseController
 
 	def destroy
 		resource = User.find_for_database_authentication(:authentication_token => params[:auth_token])
-		resource.authentication_token = nil
-		resource.save
-		render :json=> {:success=>true, :message=>"Session Destroyed", :status =>200 }
+		if not resource.nil?
+			resource.authentication_token = nil
+			resource.save
+			render :json=> {:success=>true, :message=>"Session Destroyed", :status =>200 }
+		else
+			render :json=> {:success=>false, :message=>"Cannot Find user with given auth_token", :status =>404 }
+		end
+
 	end
 
 	protected
