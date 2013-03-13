@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312150641) do
+ActiveRecord::Schema.define(:version => 20130313082712) do
+
+  create_table "patients", :force => true do |t|
+    t.string   "lastName"
+    t.string   "firstName"
+    t.string   "gender",               :limit => 1
+    t.string   "ethnicity"
+    t.date     "dateOfBirth"
+    t.string   "email",                              :null => false
+    t.string   "mobileNumber"
+    t.text     "address"
+    t.string   "phoneNumber"
+    t.text     "notes"
+    t.string   "identificationNumber", :limit => 20
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "patients", ["firstName"], :name => "index_patients_on_firstName"
+  add_index "patients", ["identificationNumber"], :name => "index_patients_on_identificationNumber", :unique => true
+  add_index "patients", ["lastName"], :name => "index_patients_on_lastName"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",          :null => false

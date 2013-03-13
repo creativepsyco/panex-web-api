@@ -1,5 +1,8 @@
 PanexWebApi::Application.routes.draw do
 
+  resources :patients
+
+
   devise_for(:users, :controllers => { :sessions => "sessions" })
   
   resources :users
