@@ -1,11 +1,15 @@
 PanexWebApi::Application.routes.draw do
 
+  
   resources :patients
+  resources :apps, :only => [:index, :show]
 
 
   devise_for(:users, :controllers => { :sessions => "sessions" })
   
-  resources :users
+  resources :users do
+    resources :apps, :only => [:create, :update, :destroy]
+  end
 
   root :to => "home#index"
   # The priority is based upon order of creation:
