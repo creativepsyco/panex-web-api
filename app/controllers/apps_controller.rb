@@ -41,7 +41,9 @@ class AppsController < ApplicationController
   # POST /apps
   # POST /apps.json
   def create
+    # XXX: make sure authenticated person is same
     @app = App.new(params[:app])
+    @app.user = User.find(params[:user_id])
 
     respond_to do |format|
       if @app.save
@@ -58,6 +60,7 @@ class AppsController < ApplicationController
   # PUT /apps/1.json
   def update
     @app = App.find(params[:id])
+    @app.user = User.find(params[:user_id])
 
     respond_to do |format|
       if @app.update_attributes(params[:app])
