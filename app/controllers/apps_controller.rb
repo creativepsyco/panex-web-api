@@ -1,5 +1,6 @@
 class AppsController < ApplicationController
-  before_filter :authenticate_user!
+  include AppsHelper
+  before_filter :authenticate_user!, :except => [:index, :show]
   # GET /apps
   # GET /apps.json
   def index
@@ -18,6 +19,7 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.zip { generate_zip(@app) }
       format.json { render json: @app }
     end
   end
