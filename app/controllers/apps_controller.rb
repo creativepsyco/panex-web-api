@@ -41,16 +41,24 @@ class AppsController < ApplicationController
   # POST /apps
   # POST /apps.json
   def create
+    puts params
     # XXX: make sure authenticated person is same
-    @app = App.new(params[:app])
-    @app.user = User.find(params[:user_id])
-
+    app_data = {
+      :name => params[:name],
+      :description => params[:description],
+      :thumbnail => params[:thumbnail],
+      :helpLink => params[:helpLink],
+      :version => params[:version],
+      :user_id => params[:user_id]
+    }
+    @app = App.new(app_data)
+    
     respond_to do |format|
       if @app.save
-        format.html { redirect_to @app, notice: 'App was successfully created.' }
-        format.json { render json: @app, status: :created, location: @app }
+        format.html #{ redirect_to @app, notice: 'App was successfully created.' }
+        format.json { render json: @app, status: :created }
       else
-        format.html { render action: "new" }
+        format.html # { render action: "new" }
         format.json { render json: @app.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +72,7 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       if @app.update_attributes(params[:app])
-        format.html { redirect_to @app, notice: 'App was successfully updated.' }
+        format.html # { redirect_to @app, notice: 'App was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,7 +88,7 @@ class AppsController < ApplicationController
     @app.destroy
 
     respond_to do |format|
-      format.html { redirect_to apps_url }
+      format.html # { redirect_to apps_url }
       format.json { head :no_content }
     end
   end

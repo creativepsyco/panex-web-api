@@ -13,8 +13,19 @@
 
 ActiveRecord::Schema.define(:version => 20130318175019) do
 
-# Could not dump table "apps" because of following StandardError
-#   Unknown type 'attachment' for column 'thumbnail'
+  create_table "apps", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.string   "helpLink"
+    t.string   "version"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+  end
 
   create_table "patients", :force => true do |t|
     t.string   "lastName"
@@ -37,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20130318175019) do
   add_index "patients", ["lastName"], :name => "index_patients_on_lastName"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",          :null => false
+    t.string   "encrypted_password",     :default => "",          :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -47,11 +58,11 @@ ActiveRecord::Schema.define(:version => 20130318175019) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "authentication_token"
-    t.string   "role"
-    t.string   "name",                   :default => "", :null => false
+    t.string   "role",                   :default => "clinician"
+    t.string   "name",                   :default => "",          :null => false
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

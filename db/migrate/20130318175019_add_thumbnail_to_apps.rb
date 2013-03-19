@@ -1,5 +1,5 @@
 class AddThumbnailToApps < ActiveRecord::Migration
   def change
-    add_column :apps, :thumbnail, :attachment
+    add_attachment :apps, :thumbnail
   end
 end
