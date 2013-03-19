@@ -5,8 +5,9 @@ Panex Web API
 
 
 ###Routes
+---------
 
-```
+``` bash
 
                 patients GET    /patients(.:format)            patients#index
                          POST   /patients(.:format)            patients#create
@@ -39,3 +40,5 @@ cancel_user_registration GET    /users/cancel(.:format)        devise/registrati
 
 
 ```
+###A Sub-Heading
+-------------
