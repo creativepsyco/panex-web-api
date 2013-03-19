@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318175019) do
+ActiveRecord::Schema.define(:version => 20130319152734) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(:version => 20130318175019) do
     t.string   "thumbnail_content_type"
     t.integer  "thumbnail_file_size"
     t.datetime "thumbnail_updated_at"
+    t.string   "appFile_file_name"
+    t.string   "appFile_content_type"
+    t.integer  "appFile_file_size"
+    t.datetime "appFile_updated_at"
   end
 
   create_table "patients", :force => true do |t|

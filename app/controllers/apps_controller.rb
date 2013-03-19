@@ -49,7 +49,8 @@ class AppsController < ApplicationController
       :thumbnail => params[:thumbnail],
       :helpLink => params[:helpLink],
       :version => params[:version],
-      :user_id => params[:user_id]
+      :user_id => params[:user_id],
+      :appFile => params[:appFile]
     }
     @app = App.new(app_data)
     
