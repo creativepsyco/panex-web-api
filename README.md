@@ -5,8 +5,9 @@ Panex Web API
 
 
 ###Routes
+---------
 
-```
+``` bash
 
                 patients GET    /patients(.:format)            patients#index
                          POST   /patients(.:format)            patients#create
@@ -41,9 +42,12 @@ cancel_user_registration GET    /users/cancel(.:format)        devise/registrati
 ```
 
 ###Requirements
-
+---------------
 Symlink your system folder with rails public/system folder
-``` bash
+``` perl
 bash $ ln -s /panex/system public/system 
 ```
 
+
+###A Sub-Heading
+-------------
