@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319152734) do
+ActiveRecord::Schema.define(:version => 20130320182146) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -50,6 +50,24 @@ ActiveRecord::Schema.define(:version => 20130319152734) do
   add_index "patients", ["firstName"], :name => "index_patients_on_firstName"
   add_index "patients", ["identificationNumber"], :name => "index_patients_on_identificationNumber", :unique => true
   add_index "patients", ["lastName"], :name => "index_patients_on_lastName"
+
+  create_table "services", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "creator_id"
+    t.string   "version"
+    t.string   "helpLink"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.string   "serviceFile_file_name"
+    t.string   "serviceFile_content_type"
+    t.integer  "serviceFile_file_size"
+    t.datetime "serviceFile_updated_at"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",          :null => false
