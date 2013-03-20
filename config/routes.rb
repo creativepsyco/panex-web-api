@@ -3,12 +3,14 @@ PanexWebApi::Application.routes.draw do
   
   resources :patients
   resources :apps, :only => [:index, :show]
+  resources :services, :only => [:index, :show]
 
 
   devise_for(:users, :controllers => { :sessions => "sessions" })
   
   resources :users do
     resources :apps, :only => [:create, :update, :destroy]
+    resources :services, :only => [:create, :update, :destroy]
   end
 
   root :to => "home#index"
