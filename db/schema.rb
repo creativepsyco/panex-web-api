@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320182146) do
+ActiveRecord::Schema.define(:version => 20130320184516) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(:version => 20130320182146) do
     t.integer  "creator_id"
     t.string   "version"
     t.string   "helpLink"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "serviceFile_file_name"
     t.string   "serviceFile_content_type"
     t.integer  "serviceFile_file_size"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130320182146) do
     t.string   "thumbnail_content_type"
     t.integer  "thumbnail_file_size"
     t.datetime "thumbnail_updated_at"
+    t.string   "commandLine",              :default => "", :null => false
   end
 
   create_table "users", :force => true do |t|
