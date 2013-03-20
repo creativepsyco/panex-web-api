@@ -48,7 +48,7 @@ class ServicesController < ApplicationController
       :helpLink => params[:helpLink],
       :version => params[:version],
       :creator_id => params[:user_id],
-      :appFile => params[:appFile],
+      :serviceFile => params[:serviceFile],
       :commandLine => params[:commandLine]
     }
     @service = Service.new(service_data)
