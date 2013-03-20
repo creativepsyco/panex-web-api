@@ -14,5 +14,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[A-Z0-9._%+\-]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
-  has_many :apps #, :foreign_key => "user_id" #used when wanting to a diff foriegn_key
+  has_many :apps #, :foreign_key => "user_id" #used when wanting to a diff foreign_key
+
+  has_many :services , :foreign_key => "creator_id"
 end
