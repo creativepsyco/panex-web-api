@@ -10,7 +10,7 @@ PanexWebApi::Application.routes.draw do
   
   resources :users do
     resources :apps
-    resources :services, :only => [:create, :update, :destroy]
+    resources :services #, :only => [:create, :update, :destroy]
   end
 
   root :to => "home#index"

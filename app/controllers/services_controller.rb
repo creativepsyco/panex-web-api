@@ -3,7 +3,17 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all
+    @user = nil
+    if not params[:user_id].nil?
+      @user = User.find(params[:user_id])
+    end
+
+    if not @user.nil?
+      @services = Service.find_all_by_creator_id(@user.id)
+    else
+      @services = Service.all
+    end
+
 
     respond_to do |format|
       format.html # index.html.erb
