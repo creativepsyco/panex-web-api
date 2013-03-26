@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  creator_id: 1
+  patient_id: 1
+  dataFile: 
+  type: 
+  metaData: MyString
+
+two:
+  name: MyString
+  description: MyString
+  creator_id: 1
+  patient_id: 1
+  dataFile: 
+  type: 
+  metaData: MyString
