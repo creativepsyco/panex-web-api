@@ -4,8 +4,17 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @apps = App.all
+    @user = nil
+    if not params[:user_id].nil?
+      @user = User.find(params[:user_id])
+    end
 
+    if not @user.nil?
+      @apps = App.find_all_by_user_id(@user.id)
+    else
+      @apps = App.all  
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @apps }

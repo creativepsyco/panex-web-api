@@ -9,7 +9,7 @@ PanexWebApi::Application.routes.draw do
   devise_for(:users, :controllers => { :sessions => "sessions" })
   
   resources :users do
-    resources :apps, :only => [:create, :update, :destroy]
+    resources :apps
     resources :services, :only => [:create, :update, :destroy]
   end
 
