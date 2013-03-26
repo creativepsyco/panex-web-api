@@ -17,4 +17,6 @@ class User < ActiveRecord::Base
   has_many :apps #, :foreign_key => "user_id" #used when wanting to a diff foreign_key
 
   has_many :services , :foreign_key => "creator_id"
+
+  has_many :data_upload_generics, :foreign_key => "creator_id"
 end
