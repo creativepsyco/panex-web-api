@@ -15,7 +15,7 @@ class PatientDataController < ApplicationController
 
 		# Get the generic data first
 		@generic_data = DataUploadGeneric.find_all_by_patient_id(params[:patient_id])
-		render :json => {:success => true, :data=> @generic_data, :status => 200 }
+		render :json => {:success => true, :data=> @generic_data }, :status => 200
 	end
 
 	def download
