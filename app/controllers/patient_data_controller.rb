@@ -3,10 +3,11 @@ class PatientDataController < ApplicationController
 	include AppsHelper
 
 	before_filter :authenticate_user!, :except => [:index]
-	before_filter :ensure_params_exist, :except => [:index]
+	before_filter :ensure_params_exist, :except => [:index, :index_all]
 	respond_to :json
 
 	def index
+		puts "patient_data#index fired"
 		@patient = Patient.find(params[:patient_id])
 		if @patient.nil?
 			render :json => {:success => false, :message => "missing or incorrect patient_id entered"}, :status => 422
@@ -15,6 +16,13 @@ class PatientDataController < ApplicationController
 
 		# Get the generic data first
 		@generic_data = DataUploadGeneric.find_all_by_patient_id(params[:patient_id])
+		render :json => {:success => true, :data=> @generic_data }, :status => 200
+	end
+
+	def index_all
+		puts "patient_data#index_all fired"
+		# Get the generic data first
+		@generic_data = DataUploadGeneric.all
 		render :json => {:success => true, :data=> @generic_data }, :status => 200
 	end
 
