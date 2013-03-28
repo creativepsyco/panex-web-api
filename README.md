@@ -57,7 +57,3 @@ Symlink your system folder with rails public/system folder
 ``` perl
 bash $ ln -s /panex/system public/system 
 ```
-
-
-###A Sub-Heading
--------------
