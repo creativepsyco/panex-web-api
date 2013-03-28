@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326161119) do
+ActiveRecord::Schema.define(:version => 20130328043549) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20130326161119) do
     t.string   "dataFile_content_type"
     t.integer  "dataFile_file_size"
     t.datetime "dataFile_updated_at"
-    t.string   "type"
+    t.string   "dataType"
     t.string   "metaData"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
