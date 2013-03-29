@@ -4,6 +4,7 @@ PanexWebApi::Application.routes.draw do
   post "/patients/:patient_id/patient_data/upload" => "patient_data#upload"
   get "/patients/:patient_id/patient_data/" => "patient_data#index"
   get "/patients/patient_data/" => "patient_data#index_all"
+  get "/patients/:patient_id/patient_data/download/:file_id" => "patient_data#download"
 
   resources :patients
   resources :apps, :only => [:index, :show]

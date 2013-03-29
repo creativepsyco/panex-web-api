@@ -3,7 +3,7 @@ class PatientDataController < ApplicationController
 	include AppsHelper
 
 	before_filter :authenticate_user!, :except => [:index]
-	before_filter :ensure_params_exist, :except => [:index, :index_all]
+	before_filter :ensure_params_exist, :except => [:index, :index_all, :download]
 	respond_to :json
 
 	def index
@@ -26,7 +26,28 @@ class PatientDataController < ApplicationController
 		render :json => {:success => true, :data=> @generic_data }, :status => 200
 	end
 
+	# required params
+	# Patient_id
+	# DataType
+	# File Id
 	def download
+		# Ensure that the params exist
+		if params[:dataType].blank? 
+			# Bad Request
+			render :json => {:success => false, :message=> "Please specify the dataType of the file."}, :status => 400
+			return 
+		end
+		if params[:dataType] == "GENERIC"
+			# Handle download for generic type
+			@theFile = DataUploadGeneric.find(params[:file_id])
+			if @theFile.nil?
+				render :json => {:success => false, :message => "Cannot find the file with the specified file_id" }, :status => 404
+				return
+			end 
+			send_file @theFile.dataFile.path
+			return
+		end
+		render :json => {:success => false, :message => "Error with request" }, :status => 422
 	end
 
 	##
@@ -90,5 +111,9 @@ class PatientDataController < ApplicationController
 	def ensure_params_exist
 		return unless params[:creator_id].blank?
 		render :json=>{:success=>false, :message=>"missing user_id"}, :status=>422
+	end
+
+	def send_error_json
+		render :json => {:success => false, :message => "Error with the request check params"}, :status=>422
 	end
 end
