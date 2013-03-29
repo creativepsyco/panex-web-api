@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328043549) do
+ActiveRecord::Schema.define(:version => 20130329075517) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130328043549) do
   end
 
   create_table "data_upload_generics", :force => true do |t|
-    t.string   "name"
+    t.string   "condition"
     t.string   "description"
     t.integer  "creator_id"
     t.integer  "patient_id"
