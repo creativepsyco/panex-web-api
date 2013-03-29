@@ -63,8 +63,8 @@ class PatientDataController < ApplicationController
 				file_data = {
 					:creator_id => params[:creator_id],
 					:description => params[:description],
-					:datatype => "GENERIC",
-					:name => params[:name],
+					:dataType => "GENERIC",
+					:condition => params[:condition],
 					:patient_id => @patient.id,
 					:metaData => "",
 					:dataFile => params[:files]["#{index}"]
