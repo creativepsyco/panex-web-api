@@ -40,6 +40,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.1)
+    daemons (1.1.9)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
     delayed_job_active_record (0.4.3)
@@ -129,6 +130,7 @@ PLATFORMS
 DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
+  daemons
   delayed_job_active_record
   devise (>= 2.1.0)
   jquery-rails

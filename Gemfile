@@ -44,3 +44,5 @@ gem "paperclip", "~> 3.0"
 # gem 'debugger'
 
 gem "delayed_job_active_record"
+
+gem "daemons"
