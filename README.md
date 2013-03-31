@@ -69,3 +69,39 @@ Symlink your system folder with rails public/system folder
 ``` perl
 bash $ ln -s /panex/system public/system 
 ```
+
+###Job Management
+-----------------
+
+####Delayed Job
+
+Uses [Delayed Job][1] for management of worker tasks.
+
+In order to make the the realtime viewing of the tasks online, there is a web interface to it [Delayed Job Web][2].
+
+Must run following in testing mode:
+```
+rake jobs:work
+```
+
+In production must use the following:
+``` bash
+RAILS_ENV=production script/delayed_job start
+RAILS_ENV=production script/delayed_job stop
+
+# Runs two workers in separate processes.
+RAILS_ENV=production script/delayed_job -n 2 start
+RAILS_ENV=production script/delayed_job stop
+
+# Set the --queue or --queues option to work from a particular queue.
+RAILS_ENV=production script/delayed_job --queue=tracking start
+RAILS_ENV=production script/delayed_job --queues=mailers,tasks start
+
+# Runs all available jobs and the exits
+RAILS_ENV=production script/delayed_job start --exit-on-complete
+# or to run in the foreground
+RAILS_ENV=production script/delayed_job run --exit-on-complete
+```
+
+[1]: https://github.com/collectiveidea/delayed_job
+[2]: https://github.com/ejschmitt/delayed_job_web

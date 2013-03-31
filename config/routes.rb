@@ -1,7 +1,9 @@
 PanexWebApi::Application.routes.draw do
 
+  get "/jobs" => "jobs#index"
+
   match "/delayed_job" => DelayedJobWeb, :anchor => false
-  
+
   post "/patients/:patient_id/patient_data/upload" => "patient_data#upload"
   get "/patients/:patient_id/patient_data/" => "patient_data#index"
   get "/patients/patient_data/" => "patient_data#index_all"
