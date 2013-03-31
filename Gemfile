@@ -42,3 +42,11 @@ gem "paperclip", "~> 3.0"
 
 # To use debugger
 # gem 'debugger'
+
+gem "delayed_job_active_record"
+
+gem "daemons"
+
+gem "delayed_job_web"
+
+gem "fastthread", "~> 1.0.7"
