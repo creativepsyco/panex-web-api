@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  inputDir: MyString
+  outputDir: MyString
+  creator_id: 1
+  patient_id: 1
+  service_id: 1
+
+two:
+  inputDir: MyString
+  outputDir: MyString
+  creator_id: 1
+  patient_id: 1
+  service_id: 1
