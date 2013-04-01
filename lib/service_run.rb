@@ -125,7 +125,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 			end
 		end
 		# Trigger Notification
-		
+
 		Delayed::Worker.logger.info "[ServiceRun] Finishing up Success Handling Phase"
 	end
 
