@@ -8,4 +8,22 @@ class JobsController < ApplicationController
 			format.json { render text: "success" }
 		end
 	end
+
+	def test_service_run
+		@aServiceJob = ServiceJob.new
+		@aServiceJob.inputDir = ''
+		@aServiceJob.outputDir = ''
+		@aServiceJob.patient_id = 1
+		@aServiceJob.creator_id = 1
+
+		@aServiceJob.save
+
+		aServiceRun = ServiceRun.new(DataUploadGeneric.find_all_by_patient_id(1), 1, 1, 1, "", @aServiceJob.id)
+		# Files must belong to the same patient
+		Delayed::Job.enqueue aServiceRun
+		respond_to do |format|
+			format.html # "success"
+			format.json { render json: aServiceRun, :status => 200 } 
+		end
+	end
 end
