@@ -2,6 +2,8 @@
 
 require 'fileutils'
 
+puts ARGV
+
 input_dir = ARGV[0]
 output_dir = ARGV[1]
 

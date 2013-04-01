@@ -35,11 +35,12 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 
 		@serviceJob = ServiceJob.find(service_job_id)
 		generic_path = @serviceJob.service_path
-		input_dir = @serviceJob.input_dir
-		output_dir = @serviceJob.output_dir
-		Dir.chdir generic_path
+		input_dir = @serviceJob.inputDir
+		output_dir = @serviceJob.outputDir
+		Dir.chdir(generic_path)
 		puts generic_path, command_line, input_dir, output_dir
-		system(command_line, input_dir, output_dir)
+		system("#{command_line} #{input_dir} #{output_dir}")
+		# system(command_line, input_dir, output_dir)
 
 		Delayed::Worker.logger.info "[ServiceRun] Finished execution of the perform stage"
 	end
@@ -92,7 +93,10 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		# Check the files in the output dir
 		# Add it to the database as result
 		# Trigger a notification to be sent to the creator_id
-		Rails.logger.info 'newsletter_job/success'
+		@aServiceJob = ServiceJob.find(service_job_id)
+		output_dir = @aServiceJob.inputDir
+		generic_path = @aServiceJob.service_path
+		# Create Entries based on a file's behaviour
 	end
 
 	def error(job, exception)
