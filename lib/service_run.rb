@@ -1,5 +1,6 @@
 require 'fastthread'
 require 'fileutils'
+require 'zip/zipfilesystem'
 
 class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id, :extra_params, :service_job_id)
 
@@ -79,8 +80,10 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 
 			# Do for the rest of the file types
 		end # inputFile Copy loop
-		Delayed::Worker.logger.info "File Copy Phase has been Finished"
+		Delayed::Worker.logger.info "[ServiceRun] File Copy Phase has been Finished"
 		Delayed::Worker.logger.info "[ServiceRun] initializing Service Copy Phase"
+		@service = Service.find(service_id)
+		unzip_file(@service.serviceFile.path, input_dir)
 		Delayed::Worker.logger.info "[ServiceRun] Finished Service Copy Phase "
 	end
 
@@ -105,5 +108,19 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 	def failure
 		puts "Error Encountered"
 		# page_sysadmin_in_the_middle_of_the_night
+	end
+
+	def unzip_file (file, destination)
+		Zip::ZipFile.open(file) { |zip_file|
+			zip_file.each { |f|
+				f_path=File.join(destination, f.name)
+				FileUtils.mkdir_p(File.dirname(f_path))
+				if File.exist?(f_path)
+					FileUtils.rm_rf(f_path)
+				end
+				zip_file.extract(f, f_path) unless File.exist?(f_path)
+				puts "Unzipping File #{f_path}"
+			}
+		}
 	end
 end
