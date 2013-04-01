@@ -75,10 +75,13 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 					FileUtils.cp aFile.dataFile.path, input_dir
 				end
 			end
+			# Handle Other Types of File
 
 			# Do for the rest of the file types
 		end # inputFile Copy loop
 		Delayed::Worker.logger.info "File Copy Phase has been Finished"
+		Delayed::Worker.logger.info "[ServiceRun] initializing Service Copy Phase"
+		Delayed::Worker.logger.info "[ServiceRun] Finished Service Copy Phase "
 	end
 
 	def after(job)
