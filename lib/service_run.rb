@@ -94,9 +94,10 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		# Add it to the database as result
 		# Trigger a notification to be sent to the creator_id
 		@aServiceJob = ServiceJob.find(service_job_id)
-		output_dir = @aServiceJob.inputDir
+		output_dir = @aServiceJob.outputDir
 		generic_path = @aServiceJob.service_path
 		# Create Entries based on a file's behaviour
+
 	end
 
 	def error(job, exception)
