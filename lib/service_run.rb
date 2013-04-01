@@ -7,8 +7,9 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 	def enqueue(job)
 		# Set the necessary class variables
 		# Including input and output dirs
-		output_dir = "/tmp/#{patient_id}_#{service_id}_#{Time.now.to_i}_output"
-		input_dir = "/tmp/#{patient_id}_#{service_id}_#{Time.now.to_i}_input"
+		generic_path ="/tmp/#{patient_id}_#{service_id}_#{Time.now.to_i}"
+		output_dir = "#{generic_path}/output"
+		input_dir = "#{generic_path}/input"
 
 		Delayed::Worker.logger.info "ServiceRun/Enqueued Input Dir #{input_dir} output dir: #{output_dir}"
 
@@ -21,6 +22,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		@aServiceJob = ServiceJob.find(service_job_id)
 		@aServiceJob.inputDir = input_dir
 		@aServiceJob.outputDir = output_dir
+		@aServiceJob.service_path = generic_path
 		@aServiceJob.save
 		Delayed::Worker.logger.info "ServiceJob Saved"
 	end
@@ -56,6 +58,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		# Run the file .setup line by line
 		@aServiceJob = ServiceJob.find(service_job_id)
 		input_dir = @aServiceJob.inputDir
+		generic_path = @aServiceJob.service_path
 
 		Delayed::Worker.logger.info "[ServiceRun Before] Processing Copying of Input Files"
 		inputFiles.each do |aFile|
@@ -83,7 +86,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		Delayed::Worker.logger.info "[ServiceRun] File Copy Phase has been Finished"
 		Delayed::Worker.logger.info "[ServiceRun] initializing Service Copy Phase"
 		@service = Service.find(service_id)
-		unzip_file(@service.serviceFile.path, input_dir)
+		unzip_file(@service.serviceFile.path, generic_path)
 		Delayed::Worker.logger.info "[ServiceRun] Finished Service Copy Phase "
 	end
 
