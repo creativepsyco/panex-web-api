@@ -1,6 +1,7 @@
 PanexWebApi::Application.routes.draw do
 
   get "/jobs" => "jobs#index"
+  get "/jobs/test_service_run" => "jobs#test_service_run"
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
