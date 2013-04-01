@@ -94,9 +94,39 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		# Add it to the database as result
 		# Trigger a notification to be sent to the creator_id
 		@aServiceJob = ServiceJob.find(service_job_id)
-		output_dir = @aServiceJob.inputDir
+		output_dir = @aServiceJob.outputDir
 		generic_path = @aServiceJob.service_path
 		# Create Entries based on a file's behaviour
+		Delayed::Worker.logger.info "[ServiceRun] initializing Success Handling phase"
+		Dir.foreach(output_dir) do |item|
+			next if item == '.' or item == '..'
+			# do work on real items
+			Delayed::Worker.logger.info "[ServiceRun Success] Proessing #{item}"
+			name = File.basename(item)
+			abs_output_path = "#{output_dir}/#{name}"
+			file_ext = File.extname(name)
+			if file_ext.downcase == ".jpg" or file_ext.downcase == ".png"
+				Delayed::Worker.logger.info "Processing GENERIC File"
+				upload_data = {
+					:creator_id => creator_id,
+					:patient_id => patient_id,
+					:condition => "GENERATED FILE",
+					:dataType => "GENERIC",
+					:description => "This is generated",
+					:metaData => ""
+				}
+				@aData = DataUploadGeneric.new(upload_data)
+				thisFile = File.open(abs_output_path)
+				@aData.dataFile = thisFile
+				thisFile.close
+				if @aData.save
+					Delayed::Worker.logger.debug "#{abs_output_path} successfully saved in DB"
+				end
+			end
+		end
+		# Trigger Notification
+
+		Delayed::Worker.logger.info "[ServiceRun] Finishing up Success Handling Phase"
 	end
 
 	def error(job, exception)
