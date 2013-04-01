@@ -28,27 +28,20 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 	end
 
 	def perform
-		# Run the binary as
-		# 	binary [inputDir] [outputDir]
-		# With help from the system command and not Thread
-		# We don't care about the processes spawned by the
-		# Binary itself
-		#
-		# An example:
-		# 	system("mv #{@SOURCE_DIR}/#{my_file} #{@DEST_DIR}/#{file})
-		# Additionaly also maintain a log file
-		x = 4*5
-		m = 0
-		t = Thread.new do
-			while m < x do
-				puts "performing task #{m}"
-				sleep 5
-				m += 5
-			end
-		end
+		Delayed::Worker.logger.info "[ServiceRun] Beginning execution of the perform stage"
 
-		puts "I am being performed"
-		t.join
+		@service = Service.find(service_id)
+		command_line = @service.commandLine
+
+		@serviceJob = ServiceJob.find(service_job_id)
+		generic_path = @serviceJob.service_path
+		input_dir = @serviceJob.input_dir
+		output_dir = @serviceJob.output_dir
+		Dir.chdir generic_path
+		puts generic_path, command_line, input_dir, output_dir
+		system(command_line, input_dir, output_dir)
+
+		Delayed::Worker.logger.info "[ServiceRun] Finished execution of the perform stage"
 	end
 
 	def before(job)
@@ -79,7 +72,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 					FileUtils.cp aFile.dataFile.path, input_dir
 				end
 			end
-			# Handle Other Types of File
+			# Handle Other Types of Files
 
 			# Do for the rest of the file types
 		end # inputFile Copy loop
@@ -87,7 +80,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		Delayed::Worker.logger.info "[ServiceRun] initializing Service Copy Phase"
 		@service = Service.find(service_id)
 		unzip_file(@service.serviceFile.path, generic_path)
-		Delayed::Worker.logger.info "[ServiceRun] Finished Service Copy Phase "
+		Delayed::Worker.logger.info "[ServiceRun] Finished Service Copy Phase"
 	end
 
 	def after(job)
