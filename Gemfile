@@ -50,3 +50,5 @@ gem "daemons"
 gem "delayed_job_web"
 
 gem "fastthread", "~> 1.0.7"
+
+gem "rubyzip", "~> 0.9.9"
