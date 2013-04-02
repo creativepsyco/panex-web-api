@@ -95,7 +95,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		# Trigger a notification to be sent to the creator_id
 		@aServiceJob = ServiceJob.find(service_job_id)
 		output_dir = @aServiceJob.outputDir
-		generic_path = @aServiceJob.service_path
+		# generic_path = @aServiceJob.service_path
 		# Create Entries based on a file's behaviour
 		Delayed::Worker.logger.info "[ServiceRun] initializing Success Handling phase"
 		Dir.foreach(output_dir) do |item|
