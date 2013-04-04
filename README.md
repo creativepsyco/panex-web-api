@@ -112,7 +112,31 @@ For developers who are interested in developing backend services for the online 
   * Your program binary will be invoked as specfied in `commandLine` field during upload. e.g. a valid command line can be `java myprogram`, this ofcourse assumes you run a `javac myprogram.java` in your `.setup` file. 
   * In addition you will be provided 2 more parameters `input_dir` and `output_dir` in the command line, you must use these as the location of input and output files respectively. This is done as there might be some services which will work on only some files or perhaps on all the files and produce multiple/single results. All these will be linked back to the patient and browsed as such.
   * As such you must make sure to run through all the files within the directory yourself. The service is run in a sandbox so you will not have access to other directories other than the current one (in which your program will be placed)
+  * Also see bash script writing formats
 
+An example service, does copying of data written in ruby
+```ruby
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+puts ARGV
+
+input_dir = ARGV[0]
+output_dir = ARGV[1]
+
+# Addidtional params
+Dir.foreach(input_dir) do |item|
+	next if item == '.' or item == '..'
+	# do work on real items
+	puts item
+	name = File.basename(item)
+	abs_input_path = "#{input_dir}/#{name}"
+	dest_file = "#{output_dir}/output_#{name}"
+	FileUtils.copy_file abs_input_path, dest_file
+	puts "copying to #{dest_file}"
+end
+```
 
 [1]: https://github.com/collectiveidea/delayed_job
 [2]: https://github.com/ejschmitt/delayed_job_web
