@@ -7,7 +7,7 @@ Panex Web API
 ###Routes
 ---------
 
-``` bash
+``` ruby
 
                          POST   /patients/:patient_id/patient_data/upload(.:format) patient_data#upload
                          GET    /patients/:patient_id/patient_data(.:format)        patient_data#index
