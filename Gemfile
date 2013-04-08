@@ -5,9 +5,9 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3', :group => [:development, :test] 
+gem 'sqlite3', :group => [:development, :test, :production] 
 
-gem 'pg', :group => [:production]
+# gem 'pg', :group => [:production]
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -53,3 +53,5 @@ gem "delayed_job_web"
 gem "fastthread", "~> 1.0.7"
 
 gem "rubyzip", "~> 0.9.9"
+
+gem "thin"
