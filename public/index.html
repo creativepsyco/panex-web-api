@@ -1,241 +1,347 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Ruby on Rails: Welcome aboard</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
+<!-- CHANGE THIS TITLE TAG -->
+<title>FlexApp - A Free Responsive Mobile App Website Template</title>
 
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
+<!-- media-queries.js -->
+<!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<!-- html5.js -->
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
 
-      #page {
-        background-color: #f0f0f0;
-        width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
+<link href="font/stylesheet.css" rel="stylesheet" type="text/css" />	
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+<link href="css/styles.css" rel="stylesheet" type="text/css" />
+<link href="css/media-queries.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 500px;
-      }
+<meta name="viewport" content="width=device-width" />
+ 
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
+<link href='http://fonts.googleapis.com/css?family=Exo:400,800' rel='stylesheet' type='text/css'>
 
-      #footer {
-        clear: both;
-      }
+</head>
 
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
+<body data-spy="scroll">
 
-
-      #header {
-        background-image: url("assets/rails.png");
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
-
-
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -55px;
-        margin-right: -10px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
-
-      #about-content ul {
-        padding: 0;
-        list-style-type: none;
-      }
-
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
+<!-- TOP MENU NAVIGATION -->
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+	
+			<a class="brand pull-left" href="#">
+			FlexApp
+			</a>
+	
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+		
+			<div class="nav-collapse collapse">
+				<ul id="nav-list" class="nav pull-right">
+					<li><a href="#home">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#updates">Updates</a></li>
+					<li><a href="#screenshots">Screenshots</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		
+		</div>
+	</div>
+</div>
 
 
-      #getting-started {
-        border-top: 1px solid #ccc;
-        margin-top: 25px;
-        padding-top: 15px;
-      }
-      #getting-started h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-      #getting-started h2 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        color: #333;
-        margin-bottom: 25px;
-      }
-      #getting-started ol {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #getting-started li {
-        font-size: 18px;
-        color: #888;
-        margin-bottom: 25px;
-      }
-      #getting-started li h2 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 18px;
-        color: #333;
-      }
-      #getting-started li p {
-        color: #555;
-        font-size: 13px;
-      }
+<!-- MAIN CONTENT -->
+<div class="container content container-fluid" id="home">
 
 
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
 
-      .filename {
-        font-style: italic;
-      }
-    </style>
-    <script type="text/javascript">
-      function about() {
-        info = document.getElementById('about-content');
-        if (window.XMLHttpRequest)
-          { xhr = new XMLHttpRequest(); }
-        else
-          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
-        xhr.open("GET","rails/info/properties",false);
-        xhr.send("");
-        info.innerHTML = xhr.responseText;
-        info.style.display = 'block'
-      }
-    </script>
-  </head>
-  <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
-              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+	<!-- HOME -->
+	<div class="row-fluid">
+  
+		<!-- PHONES IMAGE FOR DESKTOP MEDIA QUERY -->
+		<div class="span5 visible-desktop">
+			<img src="img/phones.png">
+		</div>
+	
+		<!-- APP DETAILS -->
+		<div class="span7">
+	
+			<!-- ICON -->
+			<div class="visible-desktop" id="icon">
+				<img src="img/app_icon.png" />
+			</div>
+			
+			<!-- APP NAME -->
+			<div id="app-name">
+				<h1>FlexApp</h1>
+			</div>
+			
+			<!-- VERSION -->
+			<div id="version">
+				<span class="version-top label label-inverse">Version 1.0</span>
+			</div>
+            
+			<!-- TAGLINE -->
+			<div id="tagline">
+				A Free Responsive Website Template for Your Mobile App
+			</div>
+		
+			<!-- PHONES IMAGE FOR TABLET MEDIA QUERY -->
+			<div class="hidden-desktop" id="phones">
+				<img src="img/phones.png">
+			</div>
+            
+			<!-- DESCRIPTION -->
+			<div id="description">
+				FlexApp is a free, fully responsive website template for marketing your mobile application. The design uses CSS3 to scale the content proportionally to whatever device is being used. Give it a try by resizing your browser!
+			</div>
+            
+			<!-- FEATURES -->
+			<ul id="features">
+				<li>Fully Responsive HTML/CSS3 Template</li>
+				<li>Built on Bootstrap by Twitter</li>
+				<li>Images and Photoshop Files Included</li>
+				<li>Completely Free!</li>
+			</ul>
+		
+			<!-- DOWNLOAD & REQUIREMENT BOX -->
+			<div class="download-box">
+				<a href="#"><img src="img/available-on-the-app-store.png"></a>
+			</div>
+			<div class="download-box">
+				<a href="#"><img src="img/android_app_on_play_logo_large.png"></a>
+			</div>
+			<div class="download-box">
+				<strong>Requirements:</strong><br>
+				Compatible with iPhone and iPod touch. Requires iPhone OS 2.2 or later. WiFi, Edge, or 3G network connection sometimes required.
+			</div>
+			<div class="download-box">
+				<strong>Requirements:</strong><br>
+				Requires Android 2.3 and higher. WiFi, Edge, or 3G network connection sometimes required.
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	
+	<!-- ABOUT & UPDATES -->
+	<div class="row-fluid" id="about">
+	
+		<div class="span6">
+			<h2 class="page-title" id="scroll_up">
+				About
+				<a href="#home" class="arrow-top">
+				<img src="img/arrow-top.png">
+				</a>
+			</h2>
+			
+			<p>FlexApp is a fully responsive HTML/CSS template perfect for marketing your mobile application. The template utilizes responsive CSS3 & jQuery technology to provide a consistent and enjoyable viewing experience across multiple devices.</p>
+			<p>FlexApp is 100% free to use. You may change, edit or modify the template however you wish, for free or commercial projects.</p> 
+			<p><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">FlexApp</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.trippoinc.com" property="cc:attributionName" rel="cc:attributionURL">Trippo</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.<br />Built on <a xmlns:dct="http://purl.org/dc/terms/" href="http://twitter.github.com/bootstrap/" rel="dct:source">Bootstrap</a>.</p>
+			
+		</div>
+	
+		<div class="span6 updates" id="updates">
+			<h2 class="page-title" id="scroll_up">
+				Updates
+				<a href="#home" class="arrow-top">
+				<img src="img/arrow-top.png">
+				</a>
+			</h2>
+			
+			<!-- UPDATES & RELEASE NOTES -->
+			
+			<h3 class="version">Version 1.2</h3>
+			<span class="release-date">Released on April 28th, 2012</span>
+			<ul>
+				<li><span class="label new">NEW</span>Challenge a Friend</li>
+				<li><span class="label fix">FIX</span>Fixed 'Resume Game' Bug</li>
+			</ul>
+			<hr>
+			
+			<h3 class="version">Version 1.1</h3>
+			<span class="release-date">Released on January 28th, 2012</span>
+			<ul>
+				<li><span class="label new">NEW</span>Facebook & Twitter Integration</li>
+				<li><span class="label fix">FIX</span>Various Bug Fixes</li>
+				<li><span class="label new">NEW</span>Graphics for Retina Display</li>
+			</ul>
+			<hr>
+		
+			<h3 class="version">Version 1.0</h3>
+			<span class="release-date">Released on January 10th, 2012</span>
+			<ul>
+				<li><span class="label label-info">NEW</span>Initial Release</li>
+			</ul>
+			
+		</div>
+	
+	</div>
+	
+	
+	
+	<!-- SCREENSHOTS -->
+	<div class="row-fluid" id="screenshots">
+		
+		<h2 class="page-title" id="scroll_up">
+				Screenshots
+				<a href="#home" class="arrow-top">
+				<img src="img/arrow-top.png">
+				</a>
+			</h2>
+		
+		<!-- SCREENSHOT IMAGES ROW 1-->
+		<ul class="thumbnails">
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+		
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+			
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+ 
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+		</ul>	
+		
+		<!-- SCREENSHOT IMAGES ROW 2-->		
+		<ul class="thumbnails">
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+			
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+			
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+			
+			<li class="span3">
+				<a href="img/screenshot.jpg" rel="gallery" class="thumbnail">
+				<img src="img/screenshot.jpg" alt="">
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	
+	
+	<!-- CONTACT -->
+	<div class="row-fluid" id="contact">
+	
+		<h2 class="page-title" id="scroll_up">
+				Contact
+				<a href="#home" class="arrow-top">
+				<img src="img/arrow-top.png">
+				</a>
+			</h2>
+		
+		<!-- CONTACT INFO -->
+		<div class="span4" id="contact-info">
+			<h3>Contact Us</h3>
+			<p>FlexApp is free and thus unfortunately we cannot provide basic support for it. We simply don't have the time to answer everyone's questions.</p>
+			<p>However, you may contact us about general business inquiries or to report bugs in the template!<p>
+			<p><a href="mailto:contact@trippoinc.com">contact@trippoinc.com</a></p>
+		</div>
+		
+		<!-- CONTACT FORM -->
+		<div class="span7" id="contact-form">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label" for="name">Name</label>
+						<div class="controls">
+							<input class="input-xlarge" type="text" id="name" placeholder="John Doe">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="email">Email</label>
+						<div class="controls">
+							<input class="input-xlarge" type="text" id="email" placeholder="john@gmail.com">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="subject">Subject</label>
+						<div class="controls">
+							<input class="input-xlarge" type="text" id="subject" placeholder="General Inquiry">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="message">Message</label>
+						<div class="controls">
+							<textarea class="input-xlarge" rows="3" id="message" placeholder="Your message..."></textarea>
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">SEND</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		
+	</div>
+	
+</div>
 
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
 
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
+<!-- FOOTER -->
+<div class="footer container container-fluid">
 
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
+	<!-- COPYRIGHT - EDIT HOWEVER YOU WANT! -->
+	<div id="copyright">
+		Copyright &copy; 2012 Trippo, Inc.<br>
+		Licensed under <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Built on <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.
+	</div>
+	
+	<!-- CREDIT - PLEASE LEAVE THIS LINK! -->
+	<div id="credits">
+		<a href="http://www.trippoinc.com/flexapp">Theme</a> by <a href="http://www.trippoinc.com">Trippo</a>.
+	</div>
 
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
+</div>
 
-            <li>
-              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
-              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
-            </li>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-collapse.js"></script>
+<script src="js/bootstrap-scrollspy.js"></script>
+<script src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="js/init.js"></script>
 
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
+</body>
 </html>
