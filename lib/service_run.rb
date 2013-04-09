@@ -104,25 +104,25 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 			Delayed::Worker.logger.info "[ServiceRun Success] Proessing #{item}"
 			name = File.basename(item)
 			abs_output_path = "#{output_dir}/#{name}"
-			file_ext = File.extname(name)
-			if file_ext.downcase == ".jpg" or file_ext.downcase == ".png"
-				Delayed::Worker.logger.info "Processing GENERIC File"
-				upload_data = {
-					:creator_id => creator_id,
-					:patient_id => patient_id,
-					:condition => "GENERATED FILE",
-					:dataType => "GENERIC",
-					:description => "This is generated",
-					:metaData => ""
-				}
-				@aData = DataUploadGeneric.new(upload_data)
-				thisFile = File.open(abs_output_path)
-				@aData.dataFile = thisFile
-				thisFile.close
-				if @aData.save
-					Delayed::Worker.logger.debug "#{abs_output_path} successfully saved in DB"
-				end
+			# file_ext = File.extname(name)
+			# if file_ext.downcase == ".jpg" or file_ext.downcase == ".png"
+			Delayed::Worker.logger.info "Processing GENERIC File"
+			upload_data = {
+				:creator_id => creator_id,
+				:patient_id => patient_id,
+				:condition => "GENERATED FILE",
+				:dataType => "GENERIC",
+				:description => "This is generated",
+				:metaData => ""
+			}
+			@aData = DataUploadGeneric.new(upload_data)
+			thisFile = File.open(abs_output_path)
+			@aData.dataFile = thisFile
+			thisFile.close
+			if @aData.save
+				Delayed::Worker.logger.debug "#{abs_output_path} successfully saved in DB"
 			end
+			# end
 		end
 		# Trigger Notification
 
