@@ -138,5 +138,16 @@ Dir.foreach(input_dir) do |item|
 end
 ```
 
+####Supporting new type of Data
+-------------------------------
+Addition of new types is easy, At some point, I wish to move out the code, refactor it and make it packaged as an interface or a base class. The design is not really decoupled as computation requires me to get the understand the type of data being dealt with.
+
+Some of the data types are supported by default. To add a new data type here are the following steps:
+
+  # Add the corresponding handler for upload function in `patient_data_controller.rb`
+  # Add the corresponding handler in download function
+  # Add the necessary input file checkout function
+  # Add the necessary output file checkout function
+
 [1]: https://github.com/collectiveidea/delayed_job
 [2]: https://github.com/ejschmitt/delayed_job_web
