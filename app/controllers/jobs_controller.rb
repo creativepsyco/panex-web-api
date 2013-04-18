@@ -56,6 +56,7 @@ class JobsController < ApplicationController
 			end
 		end
 
+		@aServiceJob.input = inputFiles
 		@aServiceJob.save
 
 		extra_params = ""

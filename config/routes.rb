@@ -18,6 +18,8 @@ PanexWebApi::Application.routes.draw do
 
   devise_for(:users, :controllers => { :sessions => "sessions" })
   
+  resources :service_jobs
+
   resources :users do
     resources :apps
     resources :services #, :only => [:create, :update, :destroy]

@@ -1,0 +1,21 @@
+<h1>Listing service_jobs</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @service_jobs.each do |service_job| %>
+  <tr>
+    <td><%= link_to 'Show', service_job %></td>
+    <td><%= link_to 'Edit', edit_service_job_path(service_job) %></td>
+    <td><%= link_to 'Destroy', service_job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Service job', new_service_job_path %>

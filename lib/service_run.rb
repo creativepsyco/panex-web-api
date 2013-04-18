@@ -98,6 +98,7 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		# generic_path = @aServiceJob.service_path
 		# Create Entries based on a file's behaviour
 		Delayed::Worker.logger.info "[ServiceRun] initializing Success Handling phase"
+		outputFiles = []
 		Dir.foreach(output_dir) do |item|
 			next if item == '.' or item == '..'
 			# do work on real items
@@ -120,11 +121,14 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 			@aData.dataFile = thisFile
 			thisFile.close
 			if @aData.save
+				outputFiles.push(@aData)
 				Delayed::Worker.logger.debug "#{abs_output_path} successfully saved in DB"
 			end
 			# end
 		end
 		# Trigger Notification
+		@aServiceJob.output = outputFiles
+		@aServiceJob.save
 
 		Delayed::Worker.logger.info "[ServiceRun] Finishing up Success Handling Phase"
 	end

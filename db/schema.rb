@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404121455) do
+ActiveRecord::Schema.define(:version => 20130418184720) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -92,6 +92,9 @@ ActiveRecord::Schema.define(:version => 20130404121455) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "service_path", :default => "", :null => false
+    t.text     "input"
+    t.text     "ouput"
+    t.text     "output"
   end
 
   create_table "services", :force => true do |t|
