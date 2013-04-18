@@ -2,7 +2,7 @@ class ServiceJobsController < ApplicationController
   # GET /service_jobs
   # GET /service_jobs.json
   def index
-    @service_jobs = ServiceJob.all
+    @service_jobs = ServiceJob.find(:all, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
