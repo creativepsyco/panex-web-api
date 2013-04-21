@@ -39,6 +39,9 @@ class ServiceRun < Struct.new(:inputFiles, :patient_id, :creator_id, :service_id
 		output_dir = @serviceJob.outputDir
 		Dir.chdir(generic_path)
 		puts generic_path, command_line, input_dir, output_dir
+		# system("find . -print -exec chmod 777 {} \;")
+		system("chmod -R 774 .")
+		puts "doing CHMOD"
 		system("#{command_line} #{input_dir} #{output_dir}")
 		# system(command_line, input_dir, output_dir)
 
